@@ -59,6 +59,10 @@ public class Policy {
    }// End of constructor
 
    /**
+      SETTER METHODS - BEGIN
+   */
+   
+   /**
       Instance method that sets the policy number based on the value that was read into the program.
       @param policyNum The policy number input by the user and read into the program as a int.
    */   
@@ -129,9 +133,14 @@ public class Policy {
    
       holderWeight = weight;
    }
-   
+
+   /**
+      GETTER METHODS - BEGIN
+   */
+      
    /**
       Instance method that returns the policy number of the policy holder.
+      @return policyNumber The policy number read into the program returned from the method.
    */
    public int getPolicyNum() {
       
@@ -140,6 +149,7 @@ public class Policy {
    
    /**
        Instance method that returns the provider name of the policy holder.
+       @return providerName The provider name of the policy holder returned from the method.
    */
    public String getProvider() {
       
@@ -148,6 +158,7 @@ public class Policy {
    
    /**
        Instance method that returns the first name of the policy holder.
+       @return holderFirstName The policy holder first name read into the program returned from the method.
    */
    public String getFirstName() {
       
@@ -156,6 +167,7 @@ public class Policy {
    
    /**
        Instance method that returns the last name of the policy holder.
+       @return holderLastName The policy holder last name read into the program returned from the method.
    */
    public String getLastName() {
       
@@ -164,6 +176,7 @@ public class Policy {
 
    /**
        Instance method that returns the age of the policy holder.
+       @return holderAge The policy holder last name read into the program returned from the method.
    */
    public int getAge() {
    
@@ -172,6 +185,7 @@ public class Policy {
    
    /**
        Instance method that returns the smoking status of the policy holder.
+       @return smokingStatus The policy holder smoking status read into the program returned from the method.
    */
    public String getSmokingStatus() {
       
@@ -180,6 +194,7 @@ public class Policy {
    
    /**
        Instance method that returns the height of the policy holder.
+       @return holderHeight The height of the policy holder read into the program returned from the method.
    */
    public double getHeight() {
       
@@ -188,6 +203,7 @@ public class Policy {
    
    /**
        Instance method that returns the weight of the policy holder.
+       @return holderWeight The weight of the policy holder read into the program returned from the method.
    */
    public double getWeight() {
       
@@ -196,6 +212,7 @@ public class Policy {
    
    /**
        Instance method that calculates the BMI of the user based on the input values from the user.
+       @return bmi The bmi of the policy holder read into the program returned from the method.
    */
    public double calculateBmi() {
       
@@ -210,6 +227,7 @@ public class Policy {
    
    /**
        Instance method that calculates the price of the insturance policy based on the values input from the user.
+       @return price The price of the policy returned from the method.
    */
    public void getPrice() {
    
@@ -254,6 +272,8 @@ public class Policy {
       
       // Calculating the price of the policy based on fees and base price.
       price = POLICY_BASE_FEE + ageFee + smokingFee + bmiFee;
+      
+      return price;
    }// End of instance method.
    
    public void displayInformation() {
