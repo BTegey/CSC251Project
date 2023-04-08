@@ -15,7 +15,9 @@ public class Project_Brandon_Tegey {
       
       // Variable declaraiton(s) and initalization(s).
       int policyNum = 0,
-          age = 0;
+          age = 0,
+          smokerCount = 0,
+          nonSmokerCount = 0;
       
       double height = 0.0,
              weight = 0.0;
@@ -32,80 +34,83 @@ public class Project_Brandon_Tegey {
       
       //Creating new ArrayList to hold Policy objects.
       ArrayList<Policy> policyHolders = new ArrayList<Policy>();
-      
-      do {
          
-         //Prompting the user to enter the filename to read policy holders from
-         System.out.print("Enter the filename: ");
-         filename = keyboard.nextLine();
+      //Prompting the user to enter the filename to read policy holders from
+      System.out.print("Enter the filename: ");
+      filename = keyboard.nextLine();
          
-         //Creating a new file object to pass in the data from a document.
-         File holderList = new File(filename);
+      //Creating a new file object to pass in the data from a document.
+      File holderList = new File(filename);
          
-         //Decision structure that determines if the file exists.
-         if(!holderList.exists()) {
+      //Decision structure that determines if the file exists.
+      if(!holderList.exists()) {
          
-            System.out.println("The file 'PolicyInformation.txt' is not found.");
+         System.out.println("The file 'PolicyInformation.txt' is not found.");
             
-            //Terminate the program.
-            System.exit(0);
-         } //End Decision Structure
+         //Terminate the program.
+         System.exit(0);
+      } //End Decision Structure
          
-         //Scanner object reading in the data passed from the File object.
-         Scanner inputFile = new Scanner(holderList);
+      //Scanner object reading in the data passed from the File object.
+      Scanner inputFile = new Scanner(holderList);
          
-         //While loop that reads in all the data and prints out to the user.
-         while(inputFile.hasNext()) {
+      //While loop that reads in all the data and prints out to the user.
+      while(inputFile.hasNext()) {
             
-            //Read in information from file.
-            policyNum = inputFile.nextInt();
+         //Read in information from file.
+         policyNum = inputFile.nextInt();
             
-            //Clear the buffer.
+         //Clear the buffer.
+         inputFile.nextLine();
+            
+         providerName = inputFile.nextLine();
+            
+         firstName = inputFile.nextLine();
+            
+         lastName = inputFile.nextLine();
+            
+         age = inputFile.nextInt();
+          
+         //Clear the buffer.
+         inputFile.nextLine();
+            
+         smokingStatus = inputFile.nextLine();
+           
+         height = inputFile.nextDouble();
+            
+         weight = inputFile.nextDouble();
+            
+         //Create new Policy object in ArrayList from read in data.
+         policyHolders.add(new Policy(policyNum, providerName, firstName, lastName, age, smokingStatus, height, weight));
+            
+         //Decision structure to clear the buffer if data is left to be read in from the file.
+         if(inputFile.hasNext()) {
+         
             inputFile.nextLine();
-            
-            providerName = inputFile.nextLine();
-            
-            firstName = inputFile.nextLine();
-            
-            lastName = inputFile.nextLine();
-            
-            age = inputFile.nextInt();
-            
-            //Clear the buffer.
             inputFile.nextLine();
-            
-            smokingStatus = inputFile.nextLine();
-            
-            height = inputFile.nextDouble();
-            
-            weight = inputFile.nextDouble();
-            
-            //Create new Policy object in ArrayList from read in data.
-            policyHolders.add(new Policy(policyNum, providerName, firstName, lastName, age, smokingStatus, height, weight));
-            
-            //Decision structure to clear the buffer if data is left to be read in from the file.
-            if(inputFile.hasNext()) {
+         } //End of decision structure.
+      } //End of while loop.
          
-               inputFile.nextLine();
-               inputFile.nextLine();
-            } //End of decision structure.
-         } //End of while loop.
+      //Close the file.
+      inputFile.close();
          
-         //Close the file.
-         inputFile.close();
-         
-         //For loop that prints out the objects in the policyHolders ArrayList
-         for(int index = 0; index < policyHolders.size(); index++) {
+      //For loop that prints out the objects in the policyHolders ArrayList
+      for(int index = 0; index < policyHolders.size(); index++) {
         
-             policyHolders.get(index).displayInformation(); 
-         } //End for loop.
-                 
-          // Prompting the user to enter whether they would like to run the program again.
-          System.out.print("Would you like to check another policy? (Y/N): ");
-         
-           // Reading the users choice to run or not run the program again.
-          goAgain = keyboard.nextLine();
-         
-      }while((goAgain.compareToIgnoreCase("y") == 0));// End of loop.
+          policyHolders.get(index).displayInformation();
+             
+          //Decision structure that determines the number of smokers and non-smokers policies.
+          if((policyHolders.get(index).getSmokingStatus().compareToIgnoreCase("smoker") == 0)) {
+               
+            smokerCount++;
+          }
+          else {
+             
+            nonSmokerCount++;
+          } //End decision structure.
+      } //End for loop.
+      
+     System.out.print("\nThe number of policies with a smoker is: " + smokerCount);
+     System.out.print("\nThe number of policies with a non-smoker is: " + nonSmokerCount);
    } //End of main
 }
