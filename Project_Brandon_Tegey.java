@@ -123,7 +123,7 @@ public class Project_Brandon_Tegey {
          
          Policy demo = new Policy(policyNum, providerName, firstName, lastName, age, smokingStatus, height, weight);
          
-         demo.getPrice();
+         demo.displayInformation();
          
          // Clearing the buffer.
          keyboard.nextLine(); 

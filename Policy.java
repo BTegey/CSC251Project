@@ -254,7 +254,10 @@ public class Policy {
       
       // Calculating the price of the policy based on fees and base price.
       price = POLICY_BASE_FEE + ageFee + smokingFee + bmiFee;
-      
+   }// End of instance method.
+   
+   public void displayInformation() {
+   
       // Printing out the policy information to the user.
       System.out.println("Policy Number: " + getPolicyNum());
       System.out.println("Providers Name: " + getProvider());
@@ -265,6 +268,7 @@ public class Policy {
       System.out.println("Policyholder’s Height: " + getHeight());
       System.out.println("Policyholder’s Weight: " + getWeight());
       System.out.printf("Policyholder’s BMI: %.2f\n", calculateBmi());
-      System.out.printf("Policy Price: $%,.2f\n", price);
-   }// End of instance method.
+      System.out.printf("Policy Price: $%,.2f\n", getPrice());
+
+   }
 }
