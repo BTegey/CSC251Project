@@ -6,12 +6,14 @@
 */
 
 import java.util.Scanner;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Project_Brandon_Tegey {
 
-   public static void main(String[]args) {
+   public static void main(String[]args) throws IOException {
       
-      // Variable declaraiton and initalization.
+      // Variable declaraiton(s) and initalization(s).
       int policyNum = 0,
           age = 0;
       
@@ -22,118 +24,88 @@ public class Project_Brandon_Tegey {
              firstName = "",
              lastName = "",
              smokingStatus = "",
-             goAgain = "";
-             
+             goAgain = "",
+             filename = "";
+      
+      //Creating new keyboard object to read information in from keyboard.       
       Scanner keyboard = new Scanner(System.in);
+      
+      //Creating new ArrayList to hold Policy objects.
+      ArrayList<Policy> policyHolders = new ArrayList<Policy>();
       
       do {
          
-         // Prompting of the user to enter the policy number.
-         System.out.print("Please enter the Policy Number: ");
+         //Prompting the user to enter the filename to read policy holders from
+         System.out.print("Enter the filename: ");
+         filename = keyboard.nextLine();
          
-         // Reading in policy number as an int.
-         policyNum = keyboard.nextInt();
+         //Creating a new file object to pass in the data from a document.
+         File holderList = new File(filename);
          
-         // Data Validation
-         while(policyNum < 0) {
+         //Decision structure that determines if the file exists.
+         if(!holderList.exists()) {
+         
+            System.out.println("The file 'PolicyInformation.txt' is not found.");
             
-            System.out.println("ERROR! Please enter a number greater than 0.");
+            //Terminate the program.
+            System.exit(0);
+         } //End Decision Structure
+         
+         //Scanner object reading in the data passed from the File object.
+         Scanner inputFile = new Scanner(holderList);
+         
+         //While loop that reads in all the data and prints out to the user.
+         while(inputFile.hasNext()) {
             
-            // Prompting of the user to enter the policy number.
-            System.out.print("Please enter the Policy Number: ");
+            //Read in information from file.
+            policyNum = inputFile.nextInt();
             
-            // Reading in policy number as an int.
-            policyNum = keyboard.nextInt();
-         }// End of loop.
-         
-         // Clearing the buffer.
-         keyboard.nextLine();
-         
-         System.out.print("\nPlease enter the Provider Name: ");
-         
-         providerName = keyboard.nextLine();
-         
-         System.out.print("\nPlease enter the Policyholder First Name: ");
-         
-         firstName = keyboard.nextLine();
-         
-         System.out.print("\nPlease enter the Policyholder Last Name: ");
-         
-         lastName = keyboard.nextLine();
-         
-         // Prompting the user to enter their age.
-         System.out.print("\nPlease enter the Policyholder Age: ");
-         
-         // Reading in the users age as an int.
-         age = keyboard.nextInt();
-         
-         // Data Validation
-         while(age < 0) {
-         
-            System.out.println("ERROR! Please enter a number greater than 0.");
+            //Clear the buffer.
+            inputFile.nextLine();
             
-            // Prompting the user to enter their age.
-            System.out.print("\nPlease enter the Policyholder Age: ");
+            providerName = inputFile.nextLine();
             
-            // Reading in the users age as an int.
-            age = keyboard.nextInt();
-         }// End of loop.
+            firstName = inputFile.nextLine();
+            
+            lastName = inputFile.nextLine();
+            
+            age = inputFile.nextInt();
+            
+            //Clear the buffer.
+            inputFile.nextLine();
+            
+            smokingStatus = inputFile.nextLine();
+            
+            height = inputFile.nextDouble();
+            
+            weight = inputFile.nextDouble();
+            
+            //Create new Policy object in ArrayList from read in data.
+            policyHolders.add(new Policy(policyNum, providerName, firstName, lastName, age, smokingStatus, height, weight));
+            
+            //Decision structure to clear the buffer if data is left to be read in from the file.
+            if(inputFile.hasNext()) {
          
-         // Clearing the buffer.
-         keyboard.nextLine();
+               inputFile.nextLine();
+               inputFile.nextLine();
+            } //End of decision structure.
+         } //End of while loop.
          
-         System.out.print("\nPlease enter the Policyholder Smoking Status (smoker/non-smoker): ");
+         //Close the file.
+         inputFile.close();
          
-         smokingStatus = keyboard.nextLine();
+         //For loop that prints out the objects in the policyHolders ArrayList
+         for(int index = 0; index < policyHolders.size(); index++) {
+        
+             policyHolders.get(index).displayInformation(); 
+         } //End for loop.
+                 
+          // Prompting the user to enter whether they would like to run the program again.
+          System.out.print("Would you like to check another policy? (Y/N): ");
          
-         // Prompting the user to enter their height.
-         System.out.print("\nPlease enter the Policyholder Height (in inches): ");
+           // Reading the users choice to run or not run the program again.
+          goAgain = keyboard.nextLine();
          
-         // Reading in the users height as a double.
-         height = keyboard.nextDouble();
-         
-         while(height < 0) {
-         
-           System.out.println("ERROR! Please enter a number greater than 0.");
-          
-           // Prompting the user to enter their height.
-           System.out.print("\nPlease enter the Policyholder Height (in inches): ");
-           
-           // Reading in the users height as a double.
-           height = keyboard.nextDouble();            
-         }
-         
-         // Prompting the user to enter their Weight.
-         System.out.print("\nPlease enter the Policyholder Weight (in pounds): ");
-         
-         // Reading in the users Weight as a double.
-         weight = keyboard.nextDouble();
-         
-         // Data Validaiton
-         while(weight < 0) {
-         
-           System.out.println("ERROR! Please enter a number greater than 0.");
-           
-           // Prompting the user to enter their Weight.
-           System.out.print("\nPlease enter the Policyholder Weight (in inches): ");
-          
-           // Reading in the users Weight as a double.
-           weight = keyboard.nextDouble();            
-         }// End of loop.
-         
-         Policy demo = new Policy(policyNum, providerName, firstName, lastName, age, smokingStatus, height, weight);
-         
-         demo.displayInformation();
-         
-         // Clearing the buffer.
-         keyboard.nextLine(); 
-         
-         // Prompting the user to enter whether they would like to run the program again.
-         System.out.print("Would you like to check another policy? (Y/N): ");
-         
-         // Reading the users choice to run or not run the program again.
-         goAgain = keyboard.nextLine();
-         
-      } while((goAgain.compareToIgnoreCase("y") == 0));// End of loop.
-   }
+      }while((goAgain.compareToIgnoreCase("y") == 0));// End of loop.
+   } //End of main
 }

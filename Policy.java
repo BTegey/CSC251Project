@@ -229,7 +229,7 @@ public class Policy {
        Instance method that calculates the price of the insturance policy based on the values input from the user.
        @return price The price of the policy returned from the method.
    */
-   public void getPrice() {
+   public double getPrice() {
    
       double price = 0.0,
              bmiFee = 0.0,
@@ -279,15 +279,15 @@ public class Policy {
    public void displayInformation() {
    
       // Printing out the policy information to the user.
-      System.out.println("Policy Number: " + getPolicyNum());
-      System.out.println("Providers Name: " + getProvider());
-      System.out.println("Policyholder's First Name: " + getFirstName());
-      System.out.println("Policyholder's Last Name: " + getLastName());
-      System.out.println("Policyholder's age: " + getAge());
-      System.out.println("Policyholder's Smoking Status: " + getSmokingStatus());
-      System.out.println("Policyholder’s Height: " + getHeight());
-      System.out.println("Policyholder’s Weight: " + getWeight());
-      System.out.printf("Policyholder’s BMI: %.2f\n", calculateBmi());
+      System.out.println("\nPolicy Number: " + getPolicyNum());
+      System.out.println("Provider Name: " + getProvider());
+      System.out.println("Policyholder First Name: " + getFirstName());
+      System.out.println("Policyholder Last Name: " + getLastName());
+      System.out.println("Policyholder Age: " + getAge());
+      System.out.println("Policyholder Smoking Status: " + getSmokingStatus());
+      System.out.println("Policyholder Height: " + getHeight());
+      System.out.println("Policyholder Weight: " + getWeight());
+      System.out.printf("Policyholder BMI: %.2f\n", calculateBmi());
       System.out.printf("Policy Price: $%,.2f\n", getPrice());
 
    }
