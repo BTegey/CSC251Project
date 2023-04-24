@@ -41,13 +41,13 @@ public class PolicyHolder {
       This will be used to avoid security holes.
       @param object2 The object to copy.
    */
-   public PolicyHolder(Policyholder object2) {
+   public PolicyHolder(PolicyHolder object2) {
       
       holderAge = object2.holderAge;
       holderWeight = object2.holderWeight;
       holderHeight = object2.holderHeight;
-      holderFirstName = object2.firstName;
-      holderLastName = object2.lastName;
+      holderFirstName = object2.holderFirstName;
+      holderLastName = object2.holderLastName;
       smokingStatus = object2.smokingStatus;
    }// End of constructor.
    
@@ -166,5 +166,34 @@ public class PolicyHolder {
       
       return holderWeight;
    }// End of instance method.
-
-}
+   
+   /**
+       Instance method that calculates the BMI of the user based on the input values from the user.
+       @return bmi The bmi of the policy holder read into the program returned from the method.
+   */
+   public double calculateBmi() {
+      
+      // Local Variable Declared and Inistalized.
+      double bmi = 0.0;
+       
+      // Calcualation of the bmi through the use of the other instance methods.
+      bmi = (getWeight() * 703)/(Math.pow(getHeight(), 2));
+      
+      return bmi;
+   }// End of instance method.
+   
+   /**
+      Instance method that returns the policy holder inforamtion formmated as a string.
+      @return A string containing the policy holder information
+   */
+   public String toString() {
+      
+      return String.format("Policyholder First Name: " + getFirstName() + 
+                           "\nPolicyholder Last Name: " + getLastName() +
+                           "\nPolicyholder Age: " + getAge() +
+                           "\nPolicyholder Smoking Status: " + getSmokingStatus() +
+                           "\nPolicyholder Height: " + getHeight() +
+                           "\nPolicyholder Weight: " + getWeight() +
+                           "\nPolicyholder BMI: %.2f\n", calculateBmi());
+   }// End of instance method.
+}// End of class.
