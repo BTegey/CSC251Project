@@ -112,8 +112,9 @@ public class Project_Brandon_Tegey {
          
       //For loop that prints out the objects in the policyHolders ArrayList
       for(int index = 0; index < policyHolders.size(); index++) {
-        
-          policyHolders.get(index).toString();
+          
+          //Implicitly calling the toString method from the Policy objects.
+          System.out.print(policyHolders.get(index));
              
           //Decision structure that determines the number of smokers and non-smokers policies.
           if((policyHolderInfo.get(index).getSmokingStatus().compareToIgnoreCase("smoker") == 0)) {
