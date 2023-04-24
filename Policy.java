@@ -7,17 +7,13 @@
 */
 public class Policy {
 
-   // Fields Declared
-   private int policyNumber,
-               holderAge;
-               
-   private double holderWeight,
-                  holderHeight;
-                  
-   private String providerName,
-                  holderFirstName,
-                  holderLastName,
-                  smokingStatus;
+   // Fields Declared.
+   private int policyNumber;
+   
+   private String providerName;
+   
+   // Instance of the PolicyHolder class.
+   private PolicyHolder policyHolder;
    
    /**
       No-arg constructor that initalizes all the necessary parameters in the program.
@@ -25,37 +21,20 @@ public class Policy {
    public Policy() {
    
       policyNumber = 0;
-      holderAge = 0;
-      holderWeight = 0.0;
-      holderHeight = 0.0;
-      providerName = "Provider Name";
-      holderFirstName = "First Name";
-      holderLastName = "Last Name";
-      smokingStatus = "non-smoker";
-   }// End of no-arg Constructor
+   }// End of no-arg Constructor.
    
    /**
       Constructor that reads in the users input values to then assign and inistalize the class fields.
       @param policyNum The policy number input by the user and read into the program as a int.
       @param provider The policy provider name input by the user and read into the program as a String.
-      @param firstName The first name of the policy holder input by the user and read into the program as a String.
-      @param lastName The last name of the polocy holder input by the user and read into the prorgram as a String.
-      @param age The age of the policy holder input into by the user and read into the program as a int.
-      @param smoking The smoking status of the policy holder input by the user and read into the proram as a String.
-      @param height The height of the policy holder input by the user and read into the program as a double.
-      @param weight The weight of the policy holder input by the user and read into the program as a double.
+      @param holder A PolicyHolder object.
    */
-   public Policy(int policyNum, String provider, String firstName, String lastName, int age, String smoking,
-                 double height, double weight) {
+   public Policy(int policyNum, String provider, PolicyHolder holder) {
       
       policyNumber = policyNum;
-      holderAge = age;
-      holderWeight = weight;
-      holderHeight = height;
       providerName = provider;
-      holderFirstName = firstName;
-      holderLastName = lastName;
-      smokingStatus = smoking;      
+      // Utilizing copy constructor from PolicyHolder class.
+      policyHolder = new PolicyHolder(holder);      
    }// End of constructor
 
    /**
@@ -81,58 +60,13 @@ public class Policy {
    }// End of instance method.
    
    /**
-      Instance method that sets the first name of the policy holder based on the value that was read into the program.
-      @param firstName The first name of the policy holder input by the user and read into the program as a String.
+      Instance method that sets the PolicyHolder object copy so as to not create security holes.
+      @param holder The PolicyHolder object.
    */
-   public void setFirstName(String firstName) {
+   public void setPolicyHolder(PolicyHolder holder) {
       
-      holderFirstName = firstName;   
+      policyHolder = new PolicyHolder(holder);
    }// End of instance method.
-   
-   /**
-      Instance method that sets the last name of the policy holder based on the value that was read into the program.
-      @param lastName The last name of the policy holder input by the user and read into the program as a String.
-   */
-   public void setLastName(String lastName) {
-   
-      holderLastName = lastName;
-   }// End of instance method.
-   
-   /**
-      Instance method that sets the age of the policy holder based on the value that was read into the program.
-      @param age The age of the policy holder input into by the user and read into the program as a int.
-   */
-   public void setAge(int age) {
-      
-      holderAge = age;
-   }// End of instance method.
-   
-   /**
-      Instance method that sets the smoking status of the policy holder based on the value that was read into the program.
-      @param smoking The smoking status of the policy holder input by the user and read into the proram as a String.
-   */
-   public void setSmokingStatus(String smoking) {
-      
-      smokingStatus = smoking;
-   }//End of instance method.
-   
-   /**
-      Instance method that sets the height of the policy holder based on the value that was read into the program.
-      @param height The height of the policy holder input by the user and read into the program as a double.
-   */
-   public void setHeight(double height) {
-      
-      holderHeight = height;
-   }// End of instance method.
-   
-   /**
-      Instance method that sets the weight of the policy holder based on the value that was read into the program.
-      @param weight The weight of the policy holder input by the user and read into the program as a double.
-   */
-   public void setWeight(double weight) {
-   
-      holderWeight = weight;
-   }
 
    /**
       GETTER METHODS - BEGIN
@@ -154,75 +88,6 @@ public class Policy {
    public String getProvider() {
       
       return providerName;
-   }// End of instance method.
-   
-   /**
-       Instance method that returns the first name of the policy holder.
-       @return holderFirstName The policy holder first name read into the program returned from the method.
-   */
-   public String getFirstName() {
-      
-      return holderFirstName;
-   }// End of instance method.
-   
-   /**
-       Instance method that returns the last name of the policy holder.
-       @return holderLastName The policy holder last name read into the program returned from the method.
-   */
-   public String getLastName() {
-      
-      return holderLastName;
-   }// End of instance method.
-
-   /**
-       Instance method that returns the age of the policy holder.
-       @return holderAge The policy holder last name read into the program returned from the method.
-   */
-   public int getAge() {
-   
-      return holderAge;
-   }
-   
-   /**
-       Instance method that returns the smoking status of the policy holder.
-       @return smokingStatus The policy holder smoking status read into the program returned from the method.
-   */
-   public String getSmokingStatus() {
-      
-      return smokingStatus;
-   }// End of instance method.
-   
-   /**
-       Instance method that returns the height of the policy holder.
-       @return holderHeight The height of the policy holder read into the program returned from the method.
-   */
-   public double getHeight() {
-      
-      return holderHeight;
-   }
-   
-   /**
-       Instance method that returns the weight of the policy holder.
-       @return holderWeight The weight of the policy holder read into the program returned from the method.
-   */
-   public double getWeight() {
-      
-      return holderWeight;
-   }// End of instance method.
-   
-   /**
-       Instance method that calculates the BMI of the user based on the input values from the user.
-       @return bmi The bmi of the policy holder read into the program returned from the method.
-   */
-   public double calculateBmi() {
-      
-      // Local Variable Declared and Inistalized.
-      double bmi = 0.0;
-       
-      // Calcualation of the bmi through the use of the other instance methods.
-      bmi = (getWeight() * 703)/(Math.pow(getHeight(), 2));
-      
-      return bmi;
    }// End of instance method.
    
    /**
@@ -276,19 +141,13 @@ public class Policy {
       return price;
    }// End of instance method.
    
-   public void displayInformation() {
+   public String toString() {
    
       // Printing out the policy information to the user.
       System.out.println("\nPolicy Number: " + getPolicyNum());
       System.out.println("Provider Name: " + getProvider());
-      System.out.println("Policyholder First Name: " + getFirstName());
-      System.out.println("Policyholder Last Name: " + getLastName());
-      System.out.println("Policyholder Age: " + getAge());
-      System.out.println("Policyholder Smoking Status: " + getSmokingStatus());
-      System.out.println("Policyholder Height: " + getHeight());
-      System.out.println("Policyholder Weight: " + getWeight());
-      System.out.printf("Policyholder BMI: %.2f\n", calculateBmi());
+      System.out.println(policyHolder.toString());
       System.out.printf("Policy Price: $%,.2f\n", getPrice());
 
    }
-}
+}// End of class.
