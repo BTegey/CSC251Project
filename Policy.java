@@ -15,6 +15,9 @@ public class Policy {
    // Instance of the PolicyHolder class.
    private PolicyHolder policyHolder;
    
+   // Static field to keep track of the number of Policy Objects created.
+   private static int policyObjects = 0;
+   
    /**
       No-arg constructor that initalizes all the necessary parameters in the program.
    */               
@@ -34,7 +37,9 @@ public class Policy {
       policyNumber = policyNum;
       providerName = provider;
       // Utilizing copy constructor from PolicyHolder class.
-      policyHolder = new PolicyHolder(holder);      
+      policyHolder = new PolicyHolder(holder);
+      
+      policyObjects ++;      
    }// End of constructor
 
    /**
@@ -88,6 +93,15 @@ public class Policy {
    public String getProvider() {
       
       return providerName;
+   }// End of instance method.
+   
+   /**
+      Instance method that returns the number of Policy Objects.
+      @return The number of policy objects created.
+   */
+   public static int getPolicyObject() {
+      
+      return policyObjects;
    }// End of instance method.
    
    /**
