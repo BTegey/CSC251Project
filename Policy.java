@@ -106,7 +106,7 @@ public class Policy {
                    SMOKER_FEE = 100;
       
       // Decision structure that determines the additional fee if the age of the policy holder is higher than 50.             
-      if(getAge() > 50) {
+      if(policyHolder.getAge() > 50) {
       
          ageFee = AGE_FEE;
       }
@@ -116,7 +116,7 @@ public class Policy {
       }
       
       // Decision structure that determines the additional fee if the policy holder is a smoker.
-      if((getSmokingStatus().compareToIgnoreCase("smoking") == 0)) {
+      if((policyHolder.getSmokingStatus().compareToIgnoreCase("smoking") == 0)) {
          
          smokingFee = SMOKER_FEE;
       }
@@ -126,9 +126,9 @@ public class Policy {
       }
       
       // Decision structure that determines the additional fee if the polocy holder has a BMI over 35.
-      if(calculateBmi() > 35) {
+      if(policyHolder.calculateBmi() > 35) {
          
-         bmiFee = (calculateBmi() - 35) * 20;
+         bmiFee = (policyHolder.calculateBmi() - 35) * 20;
       }
       else {
       
@@ -141,13 +141,16 @@ public class Policy {
       return price;
    }// End of instance method.
    
+   /**
+      Instance method that returns the policy inforamtion formated as a string.
+      @return A string containing the policy holder information
+   */
    public String toString() {
    
       // Printing out the policy information to the user.
-      System.out.println("\nPolicy Number: " + getPolicyNum());
-      System.out.println("Provider Name: " + getProvider());
-      System.out.println(policyHolder.toString());
-      System.out.printf("Policy Price: $%,.2f\n", getPrice());
-
-   }
+      return String.format("\nPolicy Number: " + getPolicyNum() +
+                           "\nProvider Name: " + getProvider() +
+                           policyHolder.toString() +
+                           "\nPolicy Price: $%,.2f\n", getPrice());
+   }// End of instance method.
 }// End of class.
