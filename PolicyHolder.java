@@ -188,12 +188,12 @@ public class PolicyHolder {
    */
    public String toString() {
       
-      return String.format("Policyholder First Name: " + getFirstName() + 
+      return String.format("\nPolicyholder First Name: " + getFirstName() + 
                            "\nPolicyholder Last Name: " + getLastName() +
                            "\nPolicyholder Age: " + getAge() +
                            "\nPolicyholder Smoking Status: " + getSmokingStatus() +
                            "\nPolicyholder Height: " + getHeight() +
                            "\nPolicyholder Weight: " + getWeight() +
-                           "\nPolicyholder BMI: %.2f\n", calculateBmi());
+                           "\nPolicyholder BMI: %.2f", calculateBmi());
    }// End of instance method.
 }// End of class.
