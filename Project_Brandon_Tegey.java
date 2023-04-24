@@ -17,6 +17,7 @@ public class Project_Brandon_Tegey {
       int policyNum = 0,
           age = 0,
           smokerCount = 0,
+          policyObjectCount = 0,
           nonSmokerCount = 0;
       
       double height = 0.0,
@@ -34,6 +35,9 @@ public class Project_Brandon_Tegey {
       
       //Creating new ArrayList to hold Policy objects.
       ArrayList<Policy> policyHolders = new ArrayList<Policy>();
+      
+      //Creating new ArrayList to hold Policy Holder objects.
+      ArrayList<PolicyHolder> policyHolderInfo = new ArrayList<PolicyHolder>();
          
       //Prompting the user to enter the filename to read policy holders from
       System.out.print("Enter the filename: ");
@@ -79,9 +83,21 @@ public class Project_Brandon_Tegey {
          height = inputFile.nextDouble();
             
          weight = inputFile.nextDouble();
+         
+         //Create a new policy holder object.
+         PolicyHolder holderInfo = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+         
+         //Create a new policy object passing in policy holder object info
+         Policy policyInfo = new Policy(policyNum, providerName, holderInfo);
+         
+         //Increasing policy holder object counter with accumulator in Policy class.
+         policyObjectCount = policyInfo.getPolicyObject();
+         
+         //Create a new Policy Holder object in the ArrayList from the read in data.
+         policyHolderInfo.add(holderInfo);
             
          //Create new Policy object in ArrayList from read in data.
-         policyHolders.add(new Policy(policyNum, providerName, firstName, lastName, age, smokingStatus, height, weight));
+         policyHolders.add(policyInfo);
             
          //Decision structure to clear the buffer if data is left to be read in from the file.
          if(inputFile.hasNext()) {
@@ -97,10 +113,10 @@ public class Project_Brandon_Tegey {
       //For loop that prints out the objects in the policyHolders ArrayList
       for(int index = 0; index < policyHolders.size(); index++) {
         
-          policyHolders.get(index).displayInformation();
+          policyHolders.get(index).toString();
              
           //Decision structure that determines the number of smokers and non-smokers policies.
-          if((policyHolders.get(index).getSmokingStatus().compareToIgnoreCase("smoker") == 0)) {
+          if((policyHolderInfo.get(index).getSmokingStatus().compareToIgnoreCase("smoker") == 0)) {
                
             smokerCount++;
           }
@@ -109,7 +125,11 @@ public class Project_Brandon_Tegey {
             nonSmokerCount++;
           } //End decision structure.
       } //End for loop.
-      
+     
+     //Printing the number of Policy Objects.
+     System.out.print("\nThere were " + policyObjectCount + " Policy objects created."); 
+     
+     //Printing smoker and non-smoker count.
      System.out.print("\nThe number of policies with a smoker is: " + smokerCount);
      System.out.print("\nThe number of policies with a non-smoker is: " + nonSmokerCount);
    } //End of main
